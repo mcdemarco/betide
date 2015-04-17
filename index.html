@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Betide</title>
+	<meta name="viewport" content="width=device-width,initial-scale=0.5">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<style>
+	html {
+		height: 100%;
+	}
+	
+	body {
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		margin:0;
+	}
+
+	.announce {
+		background: rgba(255,255,255, .8);
+		color: #111;
+		border-radius: 20px;
+		position:absolute;
+		top: 0;
+		left: 0;
+		margin: 10%;
+		padding: 20px;
+		z-index: 10;
+	 }
+
+	 .announce h1 {
+		text-align:center;
+	 }
+
+	 .announce a {
+		color: #000;
+	 }
+	
+	/* http://themarklee.com/2013/10/16/simple-crossfading-slideshow-css/ */
+	.patterns {
+		position: relative;
+		min-width: 100%;
+		max-width: 100%;
+		height: 100%;
+		margin: 0;
+		font-family: "Gil Sans", "Lucida Grande", sans-serif;
+		font-weight: 300;
+	}
+	.patterns figure {
+		margin: 0;
+		min-width: 100%;
+		max-width: 100%;
+		height: 100%;
+		background: #fff;
+		position: absolute;
+	}
+	.patterns img {
+		-webkit-box-shadow: 0 0 2px #666;
+		box-shadow: 0 0 2px #666;
+	}
+	.patterns figcaption {
+		position: absolute;
+		top: 0;
+		width: 100%;
+		text-align:center;
+		color: #fff;
+		background: rgba(0,0,0, .4);
+		padding: 2px 4px;
+		-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+		filter: alpha(opacity=0);
+		opacity: 0;
+		-webkit-transition: opacity .5s;
+		-moz-transition: opacity .5s;
+		-o-transition: opacity .5s;
+		-ms-transition: opacity .5s;
+		transition: opacity .5s;
+	}
+	.touch .patterns figure figcaption,
+	.patterns:hover figure figcaption {
+		-webkit-transition: opacity .5s;
+		-moz-transition: opacity .5s;
+		-o-transition: opacity .5s;
+		-ms-transition: opacity .5s;
+		transition: opacity .5s;
+		-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+		filter: alpha(opacity=100);
+		opacity: 1;
+	}
+	.patterns figcaption a {
+		color: #fff;
+	}
+	.patterns-attr {
+		max-width: 530px;
+		text-align: right;
+		font-size: .7em;
+		font-style: italic;
+	}
+	.patterns-attr a {
+		color: #666;
+	}
+
+	.patterns figure {
+		-webkit-animation-name: xfade;
+		-webkit-animation-iteration-count: infinite;
+		-webkit-animation-duration: 60s;
+		-moz-animation-name: xfade;
+		-moz-animation-iteration-count: infinite;
+		-moz-animation-duration: 60s;
+		-ms-animation-name: xfade;
+		-ms-animation-iteration-count: infinite;
+		-ms-animation-duration: 60s;
+		-o-animation-name: xfade;
+		-o-animation-iteration-count: infinite;
+		-o-animation-duration: 60s;
+		animation-name: xfade;
+		animation-iteration-count: infinite;
+		animation-duration: 60s;
+	}
+
+	.patterns figure:nth-child(1),.patterns figure:nth-child(2),.patterns figure:nth-child(3),.patterns figure:nth-child(4),.patterns figure:nth-child(5),.patterns figure:nth-child(6),.patterns figure:nth-child(7),.patterns figure:nth-child(8),.patterns figure:nth-child(9),.patterns figure:nth-child(10),.patterns figure:nth-child(11),.patterns figure:nth-child(12),.patterns figure:nth-child(13),.patterns figure:nth-child(14),.patterns figure:nth-child(15),.patterns figure:nth-child(16),.patterns figure:nth-child(17),.patterns figure:nth-child(18),.patterns figure:nth-child(19) {
+		-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+		filter: alpha(opacity=0);
+		opacity: 0;
+	}
+	.patterns figure:nth-child(1) {
+		-webkit-animation-delay: -114s;
+		-moz-animation-delay: -114s;
+		-ms-animation-delay: -114s;
+		-o-animation-delay: -114s;
+		animation-delay: -114s;
+	}
+	.patterns figure:nth-child(2) {
+		-webkit-animation-delay: -108s;
+		-moz-animation-delay: -108s;
+		-ms-animation-delay: -108s;
+		-o-animation-delay: -108s;
+		animation-delay: -108s;
+	}
+	.patterns figure:nth-child(3) {
+		-webkit-animation-delay: -102s;
+		-moz-animation-delay: -102s;
+		-ms-animation-delay: -102s;
+		-o-animation-delay: -102s;
+		animation-delay: -102s;
+	}
+	.patterns figure:nth-child(4) {
+		-webkit-animation-delay: -96s;
+		-moz-animation-delay: -96s;
+		-ms-animation-delay: -96s;
+		-o-animation-delay: -96s;
+		animation-delay: -96s;
+	}
+	.patterns figure:nth-child(5) {
+		-webkit-animation-delay: -90s;
+		-moz-animation-delay: -90s;
+		-ms-animation-delay: -90s;
+		-o-animation-delay: -90s;
+		animation-delay: -90s;
+	}
+	.patterns figure:nth-child(6) {
+		-webkit-animation-delay: -84s;
+		-moz-animation-delay: -84s;
+		-ms-animation-delay: -84s;
+		-o-animation-delay: -84s;
+		animation-delay: -84s;
+	}
+	.patterns figure:nth-child(7) {
+		-webkit-animation-delay: -78s;
+		-moz-animation-delay: -78s;
+		-ms-animation-delay: -78s;
+		-o-animation-delay: -78s;
+		animation-delay: -78s;
+	}
+	.patterns figure:nth-child(8) {
+		-webkit-animation-delay: -72s;
+		-moz-animation-delay: -72s;
+		-ms-animation-delay: -72s;
+		-o-animation-delay: -72s;
+		animation-delay: -72s;
+	}
+	.patterns figure:nth-child(9) {
+		-webkit-animation-delay: -66s;
+		-moz-animation-delay: -66s;
+		-ms-animation-delay: -66s;
+		-o-animation-delay: -66s;
+		animation-delay: -66s;
+	}
+	.patterns figure:nth-child(10) {
+		-webkit-animation-delay: -60s;
+		-moz-animation-delay: -60s;
+		-ms-animation-delay: -60s;
+		-o-animation-delay: -60s;
+		animation-delay: -60s;
+	}
+	.patterns figure:nth-child(11) {
+		-webkit-animation-delay: -54s;
+		-moz-animation-delay: -54s;
+		-ms-animation-delay: -54s;
+		-o-animation-delay: -54s;
+		animation-delay: -54s;
+	}
+	.patterns figure:nth-child(12) {
+		-webkit-animation-delay: -48s;
+		-moz-animation-delay: -48s;
+		-ms-animation-delay: -48s;
+		-o-animation-delay: -48s;
+		animation-delay: -48s;
+	}
+	.patterns figure:nth-child(13) {
+		-webkit-animation-delay: -42s;
+		-moz-animation-delay: -42s;
+		-ms-animation-delay: -42s;
+		-o-animation-delay: -42s;
+		animation-delay: -42s;
+	}
+	.patterns figure:nth-child(14) {
+		-webkit-animation-delay: -36s;
+		-moz-animation-delay: -36s;
+		-ms-animation-delay: -36s;
+		-o-animation-delay: -36s;
+		animation-delay: -36s;
+	}
+	.patterns figure:nth-child(15) {
+		-webkit-animation-delay: -30s;
+		-moz-animation-delay: -30s;
+		-ms-animation-delay: -30s;
+		-o-animation-delay: -30s;
+		animation-delay: -30s;
+	}
+	.patterns figure:nth-child(16) {
+		-webkit-animation-delay: -24s;
+		-moz-animation-delay: -24s;
+		-ms-animation-delay: -24s;
+		-o-animation-delay: -24s;
+		animation-delay: -24s;
+	}
+	.patterns figure:nth-child(17) {
+		-webkit-animation-delay: -18s;
+		-moz-animation-delay: -18s;
+		-ms-animation-delay: -18s;
+		-o-animation-delay: -18s;
+		animation-delay: -18s;
+	}
+	.patterns figure:nth-child(18) {
+		-webkit-animation-delay: -12s;
+		-moz-animation-delay: -12s;
+		-ms-animation-delay: -12s;
+		-o-animation-delay: -12s;
+		animation-delay: -12s;
+	}
+	.patterns figure:nth-child(19) {
+		-webkit-animation-delay: -6s;
+		-moz-animation-delay: -6s;
+		-ms-animation-delay: -6s;
+		-o-animation-delay: -6s;
+		animation-delay: -6s;
+	}
+	.patterns figure:nth-child(20) {
+		-webkit-animation-delay: -0s;
+		-moz-animation-delay: -0s;
+		-ms-animation-delay: -0s;
+		-o-animation-delay: -0s;
+		animation-delay: -0s;
+	}
+	@keyframes "xfade" {
+		0% {
+			-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+   			filter: alpha(opacity=100);
+   			opacity: 1;
+			z-index: 2;
+		}
+		14.67% {
+			-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+			filter: alpha(opacity=100);
+			opacity: 1;
+			z-index: 2;
+		}
+		16.67% {
+			-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+			filter: alpha(opacity=0);
+			opacity: 0;
+			z-index: 1;
+		}
+		98% {
+			-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+   			filter: alpha(opacity=0);
+   			opacity: 0;
+			z-index: 1;
+			
+		}
+		100% {
+			-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+   			filter: alpha(opacity=100);
+   			opacity: 1;
+			z-index: 2;
+		}
+	}
+	@-moz-keyframes xfade {
+		0% {
+			filter: alpha(opacity=100);
+			opacity: 1;
+			z-index: 2;
+		}
+		14.67% {
+			filter: alpha(opacity=100);
+			opacity: 1;
+			z-index: 2;
+		}
+		16.67% {
+			filter: alpha(opacity=0);
+			opacity: 0;
+			z-index: 1;
+		}
+		98% {
+			filter: alpha(opacity=0);
+			opacity: 0;
+			z-index: 1;
+		}
+		100% {
+			filter: alpha(opacity=100);
+			opacity: 1;
+			z-index: 2;
+		}
+	}
+	@-webkit-keyframes "xfade" {
+		0% {
+			filter: alpha(opacity=100);
+			opacity: 1;
+			z-index: 2;
+		}
+		14.67% {
+			filter: alpha(opacity=100);
+			opacity: 1;
+			z-index: 2;
+		}
+		16.67% {
+			filter: alpha(opacity=0);
+			opacity: 0;
+			z-index: 1;
+		}
+		98% {
+			filter: alpha(opacity=0);
+			opacity: 0;
+			z-index: 1;
+		}
+		100% {
+			filter: alpha(opacity=100);
+			opacity: 1;
+			z-index: 2;
+		}
+	}
+	@-ms-keyframes "xfade" {
+		0% {
+			-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+			filter: alpha(opacity=100);
+			opacity: 1;
+			z-index: 2;
+		}
+		14.67% {
+			-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+			filter: alpha(opacity=100);
+			opacity: 1;
+			z-index: 2;
+		}
+		16.67% {
+			-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+			filter: alpha(opacity=0);
+			opacity: 0;
+			z-index: 1;
+		}
+		98% {
+			-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+			filter: alpha(opacity=0);
+			opacity: 0;
+			z-index: 1;
+		}
+		100% {
+			-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+			filter: alpha(opacity=100);
+			opacity: 1;
+			z-index: 2;
+		}
+	}
+	@-o-keyframes "xfade" {
+		0% {
+			filter: alpha(opacity=100);
+			opacity: 1;
+			z-index: 2;
+		}
+		14.67% {
+			filter: alpha(opacity=100);
+			opacity: 1;
+			z-index: 2;
+		}
+		16.67% {
+			filter: alpha(opacity=0);
+			opacity: 0;
+			z-index: 1;
+		}
+		98% {
+			filter: alpha(opacity=0);
+			opacity: 0;
+			z-index: 1;
+		}
+		100% {
+			filter: alpha(opacity=100);
+			opacity: 1;
+			z-index: 2;
+		}
+	}
+	
+	</style>
+</head>
+
+<body>
+	<div class="announce">
+		<h1>Betide</h1>
+		<p>This page uses the COLOURlovers.com API to randomly display the most popular seamless patterns generated by COLOURlovers users.</p>
+		<p><a id="newLink" href="#">Click here</a> to view the most recent patterns rather than the most loved.</p>
+		<p>Each pattern's title and lover (author) are shown at the top of the window on hover (or after you touch a touch screen).
+			The title link opens the pattern on the COLOURlovers website (in a new tab or window).
+			The lover link restricts Betide to that lover's patterns only.</p>
+	</div>
+	<div class="patterns"></div>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" ></script>
+	<script>
+	$(function() {
+
+	var defaultPals = 'patterns',
+		offset = 0,
+		topOrNew = 'top',
+		$container = $('div.patterns'),
+		$colorHolders,
+		loverPalsObj = {},
+		numPals = 20,
+		duration = 121*1000,
+		lover = '',
+		loverMaxPals = 1000; // the max number of offsets available to query. This will update when you receive a result from getLoverData.
+	
+	loverHash = window.location.hash.substr(1);
+
+	if (loverHash !== '') {
+		lover = loverHash;
+	}
+
+	$(window).on('hashchange',function(){
+		lover = window.location.hash.substr(1);
+		if (lover)
+			getLoverData(lover);
+		randomizeOffset();
+		randomizePals();
+	});
+
+	function checkOffset() {
+		//The colourlovers API has an undocumented restriction of the offset to 1000, so reset when we get there.
+		if ((lover && offset > loverMaxPals) || offset > 1000)
+			offset = 0;
+	}
+
+	function getRetrievalType() {
+		return defaultPals;
+	}
+	
+	// call the CL API, sets the loverMaxPals variable.
+	function getLoverData(lover) {
+		$.ajax({
+			url: 'http://www.colourlovers.com/api/lover/'+lover+'/?format=json&jsonCallback=?',
+			dataType: 'jsonp',
+			success: function(loverdata){
+				loverPalsObj = {"colors": loverdata[0].numColors,
+								"palettes": loverdata[0].numPalettes,
+								"patterns": loverdata[0].numPatterns};
+				loverMaxPals = loverPalsObj[getRetrievalType()];
+			}
+		});
+	}
+
+	function getPals(requestUrl) {
+		$.ajax({
+			url: requestUrl,
+			dataType: 'jsonp',
+			success: function(data){
+				//console.log(data);
+				drawPals(data);
+			}
+		});
+	}
+
+	function drawPals(data) {
+
+		var currently = 0;
+
+		$.each(data, function(i, palette){
+
+			var colors = (palette.colors ? palette.colors : [palette.hex]);
+			var widths = (palette.colorWidths ? palette.colorWidths : generateWidths(colors));
+
+			$colorHolders.eq(currently).css({'background-image': 'url(' + palette.imageUrl + ')'});
+			$colorHolders.eq(currently).find("figcaption").html("<a target='_blank' href='" + palette.url + "'>" + palette.title + "</a> by <a href='#" + palette.userName + "'>" + palette.userName + "</a>");
+			
+			if (console.log)
+				console.log((offset + currently) + ": " + palette.title + ", " + palette.url);
+
+			currently++;
+		});
+
+ 		offset += currently;
+
+/*		//Copy the first slide to the last.
+		$colorHolders.eq(currently).css({
+				'background-image': 'url(' + data[0].imageUrl + ')'
+		});
+		$colorHolders.eq(currently).find("figcaption").html("<a target='_blank' href='" + data[0].url + "'>" + data[0].title + "</a> by " + data[0].userName);		
+*/		
+		function generateWidths(colors) {
+			//Generate widths for pretend palettes.
+			var widths = [];
+			for (w=0; w < colors.length; w++)
+				widths.push(1/colors.length);
+			return widths;
+		}
+	}
+
+	function getRandomInteger (min, max) {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+	function randomizeOffset() {
+		if (lover) offset = getRandomInteger(offset,Math.floor(loverMaxPals/2));
+		else offset = getRandomInteger(offset,offset + 1000);
+	}
+	
+	function randomizePals() {
+		checkOffset();
+		// make the API request
+		var requestURL = 'http://www.colourlovers.com/api/' + getRetrievalType() + '/' + topOrNew + '/?format=json' + (lover ? '&lover='+lover : '') + '&showPaletteWidths=1&resultOffset='+offset+'&numResults='+numPals+'&jsonCallback=?';
+		getPals(requestURL);
+	}
+
+	// UI stuff
+	$('#full-screen-toggle').on('click', function() {
+		toggleFullScreen();
+	});
+
+	function toggleFullScreen() {
+		if ((document.fullScreenElement && document.fullScreenElement !== null) ||
+			(!document.mozFullScreen && !document.webkitIsFullScreen)) {
+			if (document.documentElement.requestFullScreen) {
+				document.documentElement.requestFullScreen();
+			} else if (document.documentElement.mozRequestFullScreen) {
+				document.documentElement.mozRequestFullScreen();
+			} else if (document.documentElement.webkitRequestFullScreen) {
+				document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+				if (!document.webkitCurrentFullScreenElement) {
+					// Element.ALLOW_KEYBOARD_INPUT does not work, document is not in full screen mode
+					document.documentElement.webkitRequestFullScreen();
+				}
+			}
+		}	else {
+			if (document.cancelFullScreen) {
+				document.cancelFullScreen();
+			} else if (document.mozCancelFullScreen) {
+				document.mozCancelFullScreen();
+			} else if (document.webkitCancelFullScreen) {
+				document.webkitCancelFullScreen();
+			}
+		}
+	}
+
+	function init() {
+		// build placeholders for the max amount of colors possible
+		for (var i = 0; i<numPals; i++) {
+			$container.append('<figure><figcaption></figcaption></figure>');
+		}
+		$colorHolders = $container.find('figure');
+
+		//Beware of fake lovers!
+		if (lover) getLoverData(lover);
+		randomizeOffset();
+		randomizePals();
+		$("#newLink").click(function(){
+			topOrNew = 'new';
+			randomizePals();
+		});
+		$(".announce").delay(10000).fadeOut(1000);
+	}
+
+	init();
+
+
+	// test for touch: http://www.stucox.com/blog/you-cant-detect-a-touchscreen/
+
+	window.addEventListener('touchstart', function setHasTouch() {
+		$("body").addClass("touch");
+		window.removeEventListener('touchstart', setHasTouch);
+	}, false);
+
+	
+	// keep bringing in random the palettes per the duration
+
+	var liveIntervalFunction = function(){
+		clearInterval(interval);
+		randomizePals();
+		interval = setInterval(liveIntervalFunction, duration);
+	};
+	var interval = window.setInterval(liveIntervalFunction, duration);
+
+});
+
+	</script>
+</body>
+</html>
