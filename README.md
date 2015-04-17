@@ -4,7 +4,7 @@ Betide is a small client-side JavaScript app that uses the COLOURlovers.com API 
 
 ## Use
 
-Open the page.  There's a [demo here]().
+Open the page.  There's a [demo here](http://mcdemarco.github.io/betide/).
 
 Each pattern's title and lover (author) are shown at the top of the window on hover (or after you touch on a touch screen).  The title link opens the pattern on the COLOURlovers website (in a new tab or window).  The lover link restricts Betide to that lover's patterns only.
 
